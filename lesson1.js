@@ -12,15 +12,14 @@ console.log(toNumeralSystem(userNumber, userBase));
 
 // 2
 
-let userFirstNumber = prompt('Введите, пожалуйста, первое число:');
-let userSecondNumber = prompt('Введите, пожалуйста,  второе число:');
+function sumAndQuotient() {
+  let first = prompt('Введите, пожалуйста, первое число:');
+  if (isNaN(first)) return ERROR_MESSAGE;
+  
+  let second = prompt('Введите, пожалуйста,  второе число:');
+  if (isNaN(first)) return ERROR_MESSAGE;
 
-function sumAndQuotient(first, second) {
-  if ( isNaN(first) || isNaN(second) ) {
-    return ERROR_MESSAGE;
-  } else {
-    return `Ответ: ${Number(first) + Number(second)}, ${first / second}`;
-  }
+  return `Ответ: ${Number(first) + Number(second)}, ${first / second}`;
 };
 
-console.log(sumAndQuotient(userFirstNumber, userSecondNumber));
+console.log(sumAndQuotient());
