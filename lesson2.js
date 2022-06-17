@@ -1,6 +1,6 @@
 // 1
 
-const deepClone = (object) => {
+const makeObjectDeepCopy = (object) => {
 
   if (typeof(object) !== 'object' || object === null) {
     return object;
