@@ -11,7 +11,7 @@ const makeObjectDeepCopy = (object) => {
   const result = Array.isArray(object) ? [] : {};
 
   for (let key in object) {
-    result[key] = deepClone(object[key])
+    result[key] = makeObjectDeepCopy(object[key])
   };
 
   return result;
@@ -21,14 +21,22 @@ const makeObjectDeepCopy = (object) => {
 
 function selectFromInterval(arr, start, end) {
   try {
+    if (!Array.isArray(arr)) {
+      throw new Error(ERROR_MESSAGE + ' Первый аргумент не является массивом.');
+    };
+
     if (! arr.every((item) => typeof(item) === 'number')) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERROR_MESSAGE + ' Массив содержит невалидные данные (не числовые значения).');
     };
   
-    if (start < 0 || end < 0) {
-      return [];
+    if (typeof(start) !== 'number') {
+      throw new Error(ERROR_MESSAGE + ' Первый агрумент не вадиден.')
     };
-  
+
+    if (typeof(end) !== 'number') {
+      throw new Error(ERROR_MESSAGE + ' Третий агрумент не вадиден.')
+    }
+
     return start < end 
               ? arr.filter((item) => start <= item && item <= end)  
               : arr.filter((item) => end <= item && item <= start); 
@@ -39,8 +47,9 @@ function selectFromInterval(arr, start, end) {
 
 selectFromInterval([1,3,5], 5, 2);
 selectFromInterval([-2, -15, 0, 4], -13, -5);
+selectFromInterval([-2, -7, -15, 0, 4], -13, -5);
 selectFromInterval(['aaa'], 2, 3);
-
+selectFromInterval({}, 2, 3);
 
 // 3
 
@@ -71,4 +80,5 @@ myIterable.from = 'aaa';
 for (let num of myIterable) {
   console.log(num);
 }
+
 
