@@ -3,11 +3,21 @@ class Stack{
     this.items = [];
     this.count = 0;
     this.maxElemQuantity = maxElemQuantity;
-    console.log(this.maxElemQuantity);
 
     if (typeof(this.maxElemQuantity) !== 'number' || this.maxElemQuantity < 0 || isNaN(this.maxElemQuantity) || this.maxElemQuantity === Infinity || this.maxElemQuantity === -Infinity) {
       throw new Error('Invalid input')
     }
+  }
+
+  static fromIterable(iterable) {
+    if (typeof iterable[Symbol.iterator] !== 'function') {
+      throw new Error('The provided instance is not iterable');
+    }
+    let result = new Stack();
+    for (let item of iterable) {
+      result.push(item);
+    }
+    return result;
   }
 
   push(elem) {
