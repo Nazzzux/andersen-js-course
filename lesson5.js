@@ -19,6 +19,7 @@ class LinkedList {
     }
     let result = new LinkedList();
     for (let item of iterable) {
+      console.log(item);
       result.append(item);
     }
     return result;
@@ -50,8 +51,8 @@ class LinkedList {
     let current = this.head;
 
     while (current) {
-      if (current.next.data === elem) {
-        return current.next;
+      if (current.data === elem) {
+        return current;
       }
       current = current.next;
     }
@@ -71,6 +72,11 @@ class LinkedList {
   }
 }
 
+const ll = new LinkedList()
+ll.append(100)
+ll.append(200)
+ll.append(300)
+console.log(ll.find(100))
 
 class Stack{
   constructor(maxElemQuantity = 10){
@@ -100,7 +106,6 @@ class Stack{
     }
     this.items[this.count] = elem;
     this.count++;
-    return this.count - 1;
   }
 
   pop() {
@@ -130,4 +135,4 @@ class Stack{
 }
 
 
-module.exports = { Stack };
+// module.exports = { Stack };
