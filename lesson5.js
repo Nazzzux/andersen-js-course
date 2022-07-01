@@ -72,12 +72,6 @@ class LinkedList {
   }
 }
 
-const ll = new LinkedList()
-ll.append(100)
-ll.append(200)
-ll.append(300)
-console.log(ll.find(100))
-
 class Stack{
   constructor(maxElemQuantity = 10){
     this.items = [];
@@ -135,4 +129,4 @@ class Stack{
 }
 
 
-// module.exports = { Stack };
+module.exports = { Stack };
