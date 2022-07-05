@@ -1,3 +1,9 @@
+const STRING_ERROR = 'Ведите, пожалуйста, строку длиной до пятидесяти символов';
+const YEAR_ERROR = 'Введите, пожалуйста, год в пределах от 1900 до текущего года включительно';
+const SPEED_ERROR = 'Введите, пожалуйста, скорость в пределах от 100км/ч жо 300 км/ч';
+const MAX_FUEL_ERROR = 'Введите, пожалуйста, количество литров в пределах от 5л до 20л';
+const CONSUMPTION_ERROR = 'Введите, пожалуйста, число расхода литров на 100км пути';
+
 class Car {
   #brand;
   #model;
@@ -18,16 +24,53 @@ class Car {
     this.#currentFuelVolume = parameters.currentFuelVolume || 0;
     this.#isStarted = parameters.isStarted || false;
     this.#mileage = parameters.mileage || 0;
+
+    this.#stringCheck(this.#brand);
+    this.#stringCheck(this.#model);
+    this.#yearCheck(this.#yearOfManufacturing);
+    this.#speedCheck(this.#maxSpeed);
+    this.#maxFuelVolumeCheck(this.#maxFuelVolume);
+    this.#fuelConsumptionCheck(this.#fuelConsumption);
+
   }
+
+  #stringCheck(string) {
+    if (typeof(string) !== 'string' || string.length < 1 || string.length > 50) {
+      throw new Error(STRING_ERROR)
+    }
+  }
+
+  #yearCheck(year) {
+    let currentYear = new Date().getFullYear();
+    if (typeof(year) !== 'number' || year < 1900 || year > currentYear) {
+      throw new Error(YEAR_ERROR);
+    }
+  }
+
+  #speedCheck(speed) {
+    if (typeof(speed) !== 'number' || speed < 100 || speed > 300) {
+      throw new Error(SPEED_ERROR);
+    }
+  }
+
+  #maxFuelVolumeCheck(liters) {
+    if (typeof(liters) !== 'number' || liters < 5 || liters > 20) {
+      throw new Error(MAX_FUEL_ERROR);
+    }
+  }
+
+  #fuelConsumptionCheck(liters) {
+    if (typeof(liters) !== 'number') {
+      throw new Error(CONSUMPTION_ERROR);
+    }
+  } 
 
   get brand() {
     return this.#brand;
   }
   
   set brand(title) {
-    if (typeof(title) !== 'string' || title.length < 1 || title.length > 50) {
-      throw new Error('ВВедите, пожалуйста, строку длиной до пятидесяти символов');
-    }
+    this.#stringCheck(title);
     this.#brand = title;
   }
 
@@ -36,9 +79,7 @@ class Car {
   }
   
   set model(title) {
-    if (typeof(title) !== 'string' || title.length < 1 || title.length > 50) {
-      throw new Error('ВВедите, пожалуйста, строку длиной до пятидесяти символов');
-    }
+    this.#stringCheck(title);
     this.#model = title;
   }
 
@@ -47,10 +88,7 @@ class Car {
   }
 
   set yearOfManufacturing(year) {
-    let currentYear = new Date().getFullYear();
-    if (typeof(year) !== 'number' || year < 1900 || year > currentYear) {
-      throw new Error('Введите, пожалуйста, год в пределах от 1900 до текущего года включительно');
-    }
+    this.#yearCheck(year);
     this.#yearOfManufacturing = year;
   }
 
@@ -59,9 +97,7 @@ class Car {
   }
 
   set maxSpeed(speed) {
-    if (typeof(speed) !== 'number' || speed < 100 || speed > 300) {
-      throw new Error('Введите, пожалуйста, скорость в пределах от 100км/ч жо 300 км/ч');
-    }
+    this.#speedCheck(speed);
     this.#maxSpeed = speed;
   }
 
@@ -70,9 +106,7 @@ class Car {
   }
 
   set maxFuelVolume(liters) {
-    if (typeof(liters) !== 'number' || liters < 5 || liters > 20) {
-      throw new Error('Введите, пожалуйста, количество литров в пределах от 5л до 20л');
-    }
+    this.#maxFuelVolume(liters);
     this.#maxFuelVolume = liters;
   }
 
@@ -81,9 +115,7 @@ class Car {
   }
 
   set fuelConsumption(liters) {
-    if (typeof(liters) !== 'number') {
-      throw new Error('Введите, пожалуйста, число расхода литров на 100км пути');
-    }
+    this.#fuelConsumptionCheck(liters);
     this.#fuelConsumption = liters;
   }
 
