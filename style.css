@@ -1,0 +1,82 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+}
+
+h1 {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 2.5rem;
+  margin: 20px 0 10px;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.numpad {
+  display: grid;
+  justify-content: center;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: 3px solid white;
+  outline: none;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.screen {
+  grid-column: 1 / -1;
+  /* background-color: rgba(255, 255, 255, .75); */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: white;
+  font-size: 2.5rem;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+[data-type="edit"] {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+[data-type="operator"] {
+  background-color: rgba(0, 0, 255, 0.7);
+}
+
+[data-type="result"] {
+  background-color: rgba(0, 255, 0, 0.7);
+}
